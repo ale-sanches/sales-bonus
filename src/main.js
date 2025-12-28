@@ -34,6 +34,7 @@ function calculateBonusByProfit(index, total, seller) {
  * @param options
  * @returns {{revenue, top_products, bonus, name, sales_count, profit, seller_id}[]}
  */
+
 function analyzeSalesData(data, options) {
     if (!data
         || !Array.isArray(data.sellers)
@@ -87,8 +88,7 @@ function analyzeSalesData(data, options) {
             seller.products_sold[item.sku] += item.quantity;
         });
 
-        // seller.revenue += totalRevenue;
-        seller.revenue += record.total_amount - record.total_discount;
+        seller.revenue += totalRevenue;
         seller.sales_count += 1;
     });
 
