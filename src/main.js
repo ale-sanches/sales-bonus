@@ -74,12 +74,11 @@ function analyzeSalesData(data, options) {
 
         // Расчёт прибыли для каждого товара
         record.items.forEach(item => {
-            const product = productIndex[item.sku]; // Товар
-            const revenue = calculateRevenue(item, product);
+            const revenue = +calculateRevenue(item, product).toFixed(2);   // округляем сразу
             totalRevenue += revenue;
 
-            const cost = product.purchase_price * item.quantity
-            seller.profit += revenue - cost;
+            const cost = +(product.purchase_price * item.quantity).toFixed(2);
+            seller.profit += +(revenue - cost).toFixed(2);
 
             // Учёт количества проданных товаров
             if (!seller.products_sold[item.sku]) {
@@ -88,7 +87,7 @@ function analyzeSalesData(data, options) {
             seller.products_sold[item.sku] += item.quantity;
             // По артикулу товара увеличить его проданное количество у продавца
         });
-        seller.revenue += totalRevenue; // добавляем суммарную выручку по чеку
+        seller.revenue += +totalRevenue.toFixed(2);
         seller.sales_count += 1;
     });
 
