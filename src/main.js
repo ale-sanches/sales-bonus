@@ -74,7 +74,8 @@ function analyzeSalesData(data, options) {
 
         // Расчёт прибыли для каждого товара
         record.items.forEach(item => {
-            const revenue = +calculateRevenue(item, product).toFixed(2);   // округляем сразу
+            const product = productIndex[item.sku]; // <-- нужно добавить эту строку
+            const revenue = +calculateRevenue(item, product).toFixed(2);   // теперь product определён
             totalRevenue += revenue;
 
             const cost = +(product.purchase_price * item.quantity).toFixed(2);
@@ -85,7 +86,6 @@ function analyzeSalesData(data, options) {
                 seller.products_sold[item.sku] = 0;
             }
             seller.products_sold[item.sku] += item.quantity;
-            // По артикулу товара увеличить его проданное количество у продавца
         });
         seller.revenue += +totalRevenue.toFixed(2);
         seller.sales_count += 1;
