@@ -19,16 +19,16 @@ function calculateSimpleRevenue(purchase, _product) {
  */
 function calculateBonusByProfit(index, total, seller) {
     if (index === 0) {
-        return 15; // первый — 15%
+        return seller.profit * 0.15;
     } else if (index === 1 || index === 2) {
-        return 10; // второй и третий — 10%
+        return seller.profit * 0.10;
     } else if (index === total - 1) {
-        return 0; // последний — 0%
+        return 0;
     } else {
-        return 5; // все остальные — 5%
+        return seller.profit * 0.05;
     }
-
 }
+
 
 /**
  * Функция для анализа данных продаж
