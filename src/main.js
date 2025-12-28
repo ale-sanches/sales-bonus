@@ -6,8 +6,7 @@
  */
 function calculateSimpleRevenue(purchase, _product) {
     const discountFactor = 1 - purchase.discount / 100;
-    const revenue = purchase.sale_price * purchase.quantity * discountFactor;
-    return revenue
+    return purchase.sale_price * purchase.quantity * discountFactor;
 }
 
 /**
@@ -18,15 +17,10 @@ function calculateSimpleRevenue(purchase, _product) {
  * @returns {number}
  */
 function calculateBonusByProfit(index, total, seller) {
-    if (index === 0) {
-        return seller.profit * 0.15;
-    } else if (index === 1 || index === 2) {
-        return seller.profit * 0.10;
-    } else if (index === total - 1) {
-        return 0;
-    } else {
-        return seller.profit * 0.05;
-    }
+    if (index === 0) return 150;      // первый
+    else if (index === 1 || index === 2) return 100; // второй и третий
+    else if (index === total - 1) return 0; // последний
+    else return 50;                   // все остальные
 }
 
 
