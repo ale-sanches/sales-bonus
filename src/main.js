@@ -6,8 +6,12 @@
  */
 function calculateSimpleRevenue(purchase, _product) {
     const discountFactor = 1 - purchase.discount / 100;
-    return purchase.sale_price * purchase.quantity * discountFactor;
+    const revenue =
+        purchase.sale_price * purchase.quantity * discountFactor;
+
+    return +revenue.toFixed(2); // ⬅️ КРИТИЧНО
 }
+
 
 /**
  * Функция для расчета бонусов
