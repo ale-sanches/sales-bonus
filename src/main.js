@@ -6,12 +6,8 @@
  */
 function calculateSimpleRevenue(purchase, _product) {
     const discountFactor = 1 - purchase.discount / 100;
-    const revenue =
-        purchase.sale_price * purchase.quantity * discountFactor;
-
-    return +revenue.toFixed(2); // ⬅️ КРИТИЧНО
+    return purchase.sale_price * purchase.quantity * discountFactor;
 }
-
 
 /**
  * Функция для расчета бонусов
@@ -84,6 +80,8 @@ function analyzeSalesData(data, options) {
             const cost = product.purchase_price * item.quantity;
 
             totalRevenue += revenue;
+            totalRevenue = +totalRevenue.toFixed(2);
+
             seller.profit += revenue - cost;
 
             if (!seller.products_sold[item.sku]) {
@@ -92,7 +90,7 @@ function analyzeSalesData(data, options) {
             seller.products_sold[item.sku] += item.quantity;
         });
 
-        seller.revenue += totalRevenue;
+        seller.revenue = +(seller.revenue + totalRevenue).toFixed(2);
         seller.sales_count += 1;
     });
 
